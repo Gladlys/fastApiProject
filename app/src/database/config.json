@@ -9,7 +9,12 @@
       "database": "ecg"
     },
     "pool2": {
-
+      "db_type": "mysql",
+      "db_con": "pymysql",
+      "user": "root",
+      "password": "lsk020109",
+      "server": "localhost:3306",
+      "database": "ecg"
     }
   }
 }

@@ -9,21 +9,13 @@
 @version: Python 3.9.5
 """
 
-
 from datetime import datetime
 
 from sqlalchemy import Column, Integer, VARCHAR, CHAR, DateTime, Boolean
 from sqlalchemy import ForeignKey
-from sqlalchemy.orm import sessionmaker, Session
 
-from database.db import Base
+from app.src.database.db import Base
 
-# session: Session = get_db()
-# session.commit()
-# query_result = session.query(User).all()
-#
-# print(query_result)
-# print(datetime.now())
 """
 t_user表
 """

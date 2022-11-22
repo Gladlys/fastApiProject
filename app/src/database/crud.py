@@ -11,8 +11,8 @@
 
 from sqlalchemy.orm import Session
 
-from database.db import session
-from database.model import User
+from app.src.database.db import session
+from app.src.database.model import User
 
 """
 t_user

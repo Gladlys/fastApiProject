@@ -11,6 +11,15 @@
 
 from fastapi import APIRouter
 
+from app.src.utils.response_result import get_result_ok, get_result_failure
+
 login_service = APIRouter()
 
+
 # TODO(gladlys) login security
+def login(username: str, pwd: str):
+    return get_result_ok(..., msg=username, data={'pwd': pwd})
+
+
+if __name__ == '__main__':
+    print(login('a', 'b').__dict__)

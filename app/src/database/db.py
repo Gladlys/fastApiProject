@@ -14,7 +14,7 @@ import json
 from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
-
+from sqlalchemy.util.compat import contextmanager
 
 Base = declarative_base()
 
@@ -22,9 +22,9 @@ config: {
     "": ""
 }
 
-with open('config.json', 'r') as json_file:
+with open('D:/MyCode/Python/fastApiProject/app/src/database/config.json', 'r') as json_file:
     config = json.load(json_file)
-    print(json.dumps(config, indent=4))
+    # print(json.dumps(config, indent=4))
 
 pools = "pools"
 pool = "ecg"
@@ -38,19 +38,27 @@ db_url = f"{db_type}+{db_con}://{user}:{password}@{server}/{database}"
 
 engine = create_engine(db_url, echo=True)
 
-Session = sessionmaker(autocommit=True, autoflush=False, bind=engine)
+Session = sessionmaker(autocommit=True, autoflush=True, bind=engine)
 session = Session()
-session.close()
+
+
+# session.close()
+
+
 # dependency,依赖
-def get_db():
-    db_session = Session()
+
+@contextmanager
+def get_db(session_maker: sessionmaker):
+    db_session = session_maker()
     try:
         yield db_session  # 使用yield实现orm的异步操作
+        db_session.commit()
     except Exception as e:
-        print(e.__dict__)
+        print(e)
+        raise e
     finally:
         db_session.close()
 
 
 if __name__ == "__main__":
-    print(get_db())
+    print(get_db(Session))

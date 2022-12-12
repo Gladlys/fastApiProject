@@ -8,9 +8,10 @@
 @software: PyCharm
 @version: Python 3.9.5
 '''
-from app.src.utils.hash_pwd import get_password_hashed
+from app.src.utils.hash_pwd import get_password_hashed, verify_password
 
 
 def test():
     print()
     print(get_password_hashed('123456'))
+    print(verify_password('123456', '$2b$12$WIIoct.0kzqRUtwWqxfweuM61qJJS5IxQA6Gj4dAfmHyN.0UcRBIq'))
